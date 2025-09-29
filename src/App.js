@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import Counter from './components/Counter';
+import { HashRouter as Router } from 'react-router-dom';
 import FunctionalComponent from './components/FuntionalComponent';
 import ClassComponent from './components/ClassComponent';
-import "./styles/App.css";
 import UserCard from './components/UserCard';
+import Counter from './components/Counter';
+import './styles/App.css';
+
 function App() {
   const [currentView, setCurrentView] = useState('home');
-  const [users, setUsers] = useState([
+  const [users] = useState([
     { id: 1, name: 'John Doe', age: 25, role: 'Developer' },
     { id: 2, name: 'Jane Smith', age: 30, role: 'Designer' },
     { id: 3, name: 'Mike Johnson', age: 28, role: 'Manager' }
@@ -44,7 +46,7 @@ function App() {
                 <h3>Props (Immutable)</h3>
                 <div className="users-grid">
                   {users.map(user => (
-                    <UserCard        
+                    <UserCard 
                       key={user.id}
                       name={user.name}
                       age={user.age}
@@ -160,23 +162,25 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <nav className="navbar">
-        <h1>React Learning</h1>
-        <div className="nav-links">
-          <button onClick={() => setCurrentView('home')}>Home</button>
-          <button onClick={() => setCurrentView('virtual-dom')}>Virtual DOM</button>
-          <button onClick={() => setCurrentView('state-props')}>State & Props</button>
-          <button onClick={() => setCurrentView('jsx')}>JSX</button>
-          <button onClick={() => setCurrentView('components')}>Components</button>
-          <button onClick={() => setCurrentView('events')}>Events</button>
-        </div>
-      </nav>
-      
-      <main className="main-content">
-        {renderContent()}
-      </main>
-    </div>
+    <Router>
+      <div className="app">
+        <nav className="navbar">
+          <h1>React Learning</h1>
+          <div className="nav-links">
+            <button onClick={() => setCurrentView('home')}>Home</button>
+            <button onClick={() => setCurrentView('virtual-dom')}>Virtual DOM</button>
+            <button onClick={() => setCurrentView('state-props')}>State & Props</button>
+            <button onClick={() => setCurrentView('jsx')}>JSX</button>
+            <button onClick={() => setCurrentView('components')}>Components</button>
+            <button onClick={() => setCurrentView('events')}>Events</button>
+          </div>
+        </nav>
+        
+        <main className="main-content">
+          {renderContent()}
+        </main>
+      </div>
+    </Router>
   );
 }
 
